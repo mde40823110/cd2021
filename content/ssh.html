@@ -133,18 +133,82 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content"> <a href='每周學習進度.html'>Next</a> >> 每周學習進度<br /><h1>About</h1>
-<p>此內容管理系統以 <a href="https://github.com/mdecourse/cmsimde">https://github.com/mdecourse/cmsimde</a> 作為 submodule 運作, 可以選定對應的版本運作, cmsimde 可以持續改版, 不會影響之前設為 submodule, 使用舊版 cmsimde 模組的內容管理相關運作.</p>
-<h4>利用 cmsimde 建立靜態網誌方法:</h4>
-<p>1. 在 github 建立倉儲, git clone 到近端</p>
-<p>2. 參考 <a href="https://github.com/mdecourse/newcms">https://github.com/mdecourse/newcms</a>, 加入除了 cmsimde 目錄外的所有內容</p>
-<p>以 git submodule add <a href="https://github.com/mdecourse/cmsimde">https://github.com/mdecourse/cmsimde</a> cmsimde</p>
-<p>建立 cmsimde 目錄, 並從 github 取下子模組內容.</p>
-<p>3.在近端維護時, 更換目錄到倉儲中的 cmsimde, 以 python wsgi.py 啟動近端網際伺服器.</p>
-<p>動態內容編輯完成後, 以 generate_pages 轉為靜態內容, 以 git add commit 及 push 將內容推到遠端.</p>
-<p>4. 之後若要以 git clone 取下包含 submodule 的所有內容, 執行:</p>
-<p>git clone --recurse-submodules <a href="https://github.com/mdecourse/newcms.git">https://github.com/mdecourse/newcms.git</a></p>
-<br /> <a href='每周學習進度.html'>Next</a> >> 每周學習進度</div>
+    <div id="tipue_search_content">W4進度 << <a href='W4進度.html'>Previous</a> <a href='更新cmsimde.html'>Next</a> >> 更新cmsimde<br /><h1>ssh</h1>
+<p>SSH 指 Secure SHell, 是一種網路連線加密機制, 當我們在 Mac OS 或 Linux 操作系統中的 Terminal 或 XTerm 時, 可以利用 ssh 帳號@遠端主機 ip 或符號名稱, 就可以輸入認證密碼, 登入到遠端主機.</p>
+<p>一般針對公開的 Github 倉儲, 任何人都可以直接透過 https 協定 clone 倉儲, 無需認證, 但是倉儲協同者若要從近端將改版資料送到 Github, 就必須通過認證, 假如採 https 協定, 則倉儲協同者在推送改版資料時, 必須提供帳號與密碼.</p>
+<p>除了 https 協定, Github 也接受倉儲的協同者以 SSH 連線的方式, git clone private 倉儲, 或以 SSH 連線的方式將近端改版資料推送到遠端倉儲.</p>
+<p>SSH 的連線加密機制依賴 private key 與 public key 之間的配對, 當使用者建立 SSH key pair 時, private key 必須保護在近端, 而 public key 則必須送到進行認證的遠端伺服器中.</p>
+<h4>建立 OpenSSH key pair</h4>
+<p>Github 伺服器所支援的 SSH 為 OpenSSH 檔案格式的協定, 因此使用者要送到 Github 伺服器上的 OpenSSH 格式 public key, 可以透過 portablegit 中的 sh.exe 進入 SHell, 然後利用以下指令建立採 <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">rsa</a> 加密演算法的 key pair:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">ssh-keygen -t rsa -b 4096 -C "使用者學號"</pre>
+<p>在 -C 後的使用者學號字串, 會直接附加在 OpenSSH public key 檔案的最後端, 讓使用者得以辨識 public key 的對應使用者, 而所建立的 OpenSSH private key 則可以透過 puttygen 轉換為 putty 特有檔案格式.</p>
+<h4>Putty 作為 SSH 連線客戶端工具</h4>
+<p>Putty 套件可用於 Windows 與 Linux 操作系統, 可以讓使用者以 SSH 加密機制遠端登入到其他伺服器主機, 由於電腦輔助設計室電腦的第三磁區上課時會轉為純 IPv6 協定上網, 當使用者要將近端改版資料推送到遠端時, 由於 Github 至今仍只支援 IPv4 網路協定, 因此無論是以 https 或 ssh 方式連線, 都必須透過能同時支援 IPv4 與 IPv6 的代理主機.</p>
+<p>以 https 協定對 Github 連線的代理主機設定位於 home/.gitconfig, 而在 Windows 10 操作系統中採 SSH 對 Github 連線, 就必須將代理主機與 private key 的設定, 透過 Putty 完成.</p>
+<h4>以 SSH 協定與 Github 連線</h4>
+<p>1. 建立一對 OpenSSH key pair, private key 保留在近端, 將 public key 登記在 Github 所屬帳號設定中.</p>
+<p>2. 近端可攜系統啟動時, 必須確認已經設定</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">set GIT_SSH=%Disk%:\putty\plink.exe</pre>
+<p>表示 git 將透過 putty 工具以 ssh 加密協定對 Github 連線</p>
+<p>3. 在 Putty 中設定對 github.com ssh 時必須提供的 Proxy 代理主機設定與 Auth 認證所需的近端 private key, 而且必須利用 puttygen 將 OpenSSH 格式轉為 putty 檔案格式</p>
+<p>4. 無論在 git clone 或 git push (URL 位於倉儲 .git/config 中), URL 必須使用 <a href="mailto:git@github.com:帳號/倉儲名稱.git">git@github.com:帳號/倉儲名稱.git</a> 連線</p>
+<h4>利用 SSH 對 Gitlab 連線</h4>
+<ol>
+<li>首先必須要將 OpenSSH 格式的 public key 登錄到 Gitlab 帳號下</li>
+<li>確定已經利用 putty.exe 建立 session 名稱為 gitlab.com 的設定, 其中設定 AUTH 與 Proxy 資料</li>
+<li>修改各倉儲中 .git/config 的 gitlab remote add 設定, 以 url = git@gitlab.com:user_name/url 對 gitlab 連接.</li>
+</ol>
+<p></p>
+<p><br/>Network &lt;&lt; <a href="/get_page/ssh/Network.html">Previous</a> <a href="/get_page/ssh/OpenSSH.html">Next</a> &gt;&gt; OpenSSH</p>
+<!-- footer -->
+<div class="container">
+<div class="row pt-3 mx-auto">
+<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> Copyright ©
+<script>
+document.write(new Date().getFullYear());
+</script>
+All rights reserved | This template is made with <i aria-hidden="true" class="icon-heart"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+</div>
+</div>
+<!-- for footer -->
+<p></p>
+<!-- for site wrap -->
+<p></p>
+<!-- <script src="../cmsimde/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+<script src="/get_page/cmsimde/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/get_page/cmsimde/static/chimper/js/jquery-ui.js"></script>
+<script src="/get_page/cmsimde/static/chimper/js/popper.min.js"></script>
+<script src="/get_page/cmsimde/static/chimper/js/bootstrap.min.js"></script>
+<script src="/get_page/cmsimde/static/chimper/js/owl.carousel.min.js"></script>
+<script src="/get_page/cmsimde/static/chimper/js/jquery.stellar.min.js"></script>
+<script src="/get_page/cmsimde/static/chimper/js/jquery.countdown.min.js"></script>
+<script src="/get_page/cmsimde/static/chimper/js/jquery.magnific-popup.min.js"></script>
+<script src="/get_page/cmsimde/static/chimper/js/bootstrap-datepicker.min.js"></script>
+<script src="/get_page/cmsimde/static/chimper/js/aos.js"></script>
+<!--
+            <script src="../cmsimde/static/chimper/js/typed.js"></script>
+                    <script>
+                    var typed = new Typed('.typed-words', {
+                    strings: ["Web Apps"," WordPress"," Mobile Apps"],
+                    typeSpeed: 80,
+                    backSpeed: 80,
+                    backDelay: 4000,
+                    startDelay: 1000,
+                    loop: true,
+                    showCursor: true
+                    });
+                    </script>
+            -->
+<script src="/get_page/cmsimde/static/chimper/js/main.js"></script>
+<!-- 啟用 LaTeX equations 編輯 -->
+<p></p>
+<!-- <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\(', '\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
+<p></p><br />W4進度 << <a href='W4進度.html'>Previous</a> <a href='更新cmsimde.html'>Next</a> >> 更新cmsimde</div>
         
     <!-- footer -->
       <div class="container">
