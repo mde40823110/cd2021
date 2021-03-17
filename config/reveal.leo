@@ -188,7 +188,7 @@ vertical: body pane on the botton</t>
 &lt;/div&gt;</t>
 <t tx="leo.20200818170328.1">&lt;section&gt;
     &lt;h2&gt;2021-40823110-協同產品設計實習&lt;/h2&gt;
-    &lt;h3&gt;The HTML Presentation Framework&lt;/h3&gt;
+
     &lt;p&gt;
 &lt;li&gt;&lt;a href="https://40823110.github.io/cd2021/content/index.html"&gt;網站&lt;/a&gt;&lt;a href="https://github.com/40823110/cd2021"&gt;倉儲&lt;/a&gt;&lt;/p&gt;
 &lt;/section&gt;
