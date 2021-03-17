@@ -314,7 +314,8 @@ vertical: body pane on the botton</t>
 <t tx="leo.20210317105124.1">&lt;section&gt;
             &lt;p&gt;&lt;iframe width="560" height="314" allowfullscreen="allowfullscreen" src="//www.youtube.com/embed/fvoF_d6DNsk"&gt;&lt;/iframe&gt;&lt;/p&gt;
             &lt;/section&gt;</t>
-<t tx="leo.20210317105150.1">&lt;h1&gt;第3版&lt;/h1&gt;
+<t tx="leo.20210317105150.1">&lt;section&gt;
+&lt;h1&gt;第3版&lt;/h1&gt;
             &lt;p&gt;&lt;a href="/downloads/組合圖-3.stl"&gt;組合圖-3.stl&lt;/a&gt;|&lt;a href="/downloads/主體-3.stl"&gt;主體-3.stl&lt;/a&gt;|&lt;a href="/downloads/引球圓盤-3.stl"&gt;引球圓盤-3.stl&lt;/a&gt;|&lt;a href="/downloads/軸承.stl"&gt;軸承.stl&lt;/a&gt;&lt;/marquee&gt;&lt;/p&gt;
             &lt;p&gt;&lt;a href="https://drive.google.com/file/d/17N-8ABgMcNleLfhRX5221DyTr4VL6H80/view?usp=sharing"&gt;發球機組合圖-3.ttt&lt;/a&gt;&lt;/p&gt;
             &lt;/section&gt;</t>
