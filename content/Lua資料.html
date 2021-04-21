@@ -133,8 +133,25 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">W3進度 << <a href='W3進度.html'>Previous</a> <a href='ssh.html'>Next</a> >> ssh<br /><h1>W4進度</h1>
-<br />W3進度 << <a href='W3進度.html'>Previous</a> <a href='ssh.html'>Next</a> >> ssh</div>
+    <div id="tipue_search_content">w6 << <a href='w6.html'>Previous</a> <a href='w7.html'>Next</a> >> w7<br /><h1>Lua資料</h1>
+<p><span>使用lua控制軸的轉速</span></p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+    -- do some initialization here
+     joint=sim.getObjectHandle('Revolute_joint')
+     sim.sJointTargetVelocity(joint,5.5)</pre>
+<p>介紹:</p>
+<p>1. 設joint 為轉軸</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">	
+joint=sim.getObjectHandle('Revolute_joint')</pre>
+<p>2.設<span>joint 的</span>速度</p>
+<p>呼叫對話框參考資料</p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetDialogInput.htm">https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetDialogInput.htm</a></p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetDialogResult.htm">https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetDialogResult.htm</a></p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/regularApi/simDisplayDialog.htm">https://www.coppeliarobotics.com/helpFiles/en/regularApi/simDisplayDialog.htm</a></p>
+<div>
+<p></p>
+</div>
+<br />w6 << <a href='w6.html'>Previous</a> <a href='w7.html'>Next</a> >> w7</div>
         
     <!-- footer -->
       <div class="container">

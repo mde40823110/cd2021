@@ -10,7 +10,8 @@
 <p>4. 之後若要以 git clone 取下包含 submodule 的所有內容, 執行:</p>
 <p>git clone --recurse-submodules <a href="https://github.com/mdecourse/newcms.git">https://github.com/mdecourse/newcms.git</a></p>
 <h1>每周學習進度</h1>
-<p><br/><br/><a href="https://cad.onshape.com/documents/5163181e2fe649a1d31dd674/w/4e88bfbfabd294ec7f2f2b4d/e/697be15fa1b7438b20521146"></a></p><h2>W3進度</h2>
+<p><br/><br/><a href="https://cad.onshape.com/documents/5163181e2fe649a1d31dd674/w/4e88bfbfabd294ec7f2f2b4d/e/697be15fa1b7438b20521146"></a></p>
+<h2>W3進度</h2>
 <p>onshape 零件圖</p>
 <p>軸承零件</p>
 <p><a href="https://cad.onshape.com/documents/0bfc2dc1ec6f4ab23ac54ffe/w/0dfb2b29b00da67b3c1974c6/e/0de22abfa577bb4913cc1c05">https://cad.onshape.com/documents/0bfc2dc1ec6f4ab23ac54ffe/w/0dfb2b29b00da67b3c1974c6/e/0de22abfa577bb4913cc1c05</a><br/><a href='/get_page/W3%E9%80%B2%E5%BA%A6/"https:/cad.onshape.com/documents/0bfc2dc1ec6f4ab23ac54ffe/w/0dfb2b29b00da67b3c1974c6/e/0de22abfa577bb4913cc1c05&lt;/a'></a></p>
@@ -98,14 +99,101 @@ All rights reserved | This template is made with <i aria-hidden="true" class="ic
   };
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
-<p></p><h3>更新cmsimde</h3>
+<p></p>
+<h3>更新cmsimde</h3>
 <p>進到cmsimde檔案裡輸入下指令合併更新版本</p>
 <pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">git pull
 </pre>
 <p></p>
 <p>到up_dir複製一分到cd2021合併資料即可更新完成</p>
 <p>接著在命令列輸入cms檢查是否更新完成</p>
-<p>若成功將會開啟</p><h1>Develop</h1>
-<p><a href="https://github.com/mdecourse/cmsimde">https://github.com/mdecourse/cmsimde</a> 的開發, 可以在一個目錄中放入 cmsimde, 然後將 up_dir 中的內容放到與 cmsimde 目錄同位階的地方, 使用 command 進入 cmsimde 目錄, 執行 python wsgi.py, 就可以啟動, 以瀏覽器 https://localhost:9443 就可以連接, 以 admin 作為管理者密碼, 就可以登入維護內容.</p>
-<p>cmsimde 的開發採用 Leo Editor, 開啟 cmsimde 目錄中的 cmsimde.leo 就可以進行程式修改, 結束後, 若要保留網際內容, 只要將 cmsimde 外部的內容倒回 up_dir 目錄中即可後續對 cmsimde 遠端倉儲進行改版.</p>
-<p>init.py 位於  up_dir 目錄, 可以設定 site_title 與 uwsgi 等變數.</p>
+<p>若成功將會執行 python wsgi.py</p>
+<h2>w5</h2>
+<h3>產品目標</h3>
+<p>主題:籃球機 二代</p>
+<p></p>
+<p>動機:</p>
+<p>第一次小組產品的籃球機只能自己轉動無法控制，所以二代的籃球機目標增加案件控制轉動。</p>
+<p></p>
+<p>製作規劃:</p>
+<p>w5:確認主題，工作分配</p>
+<p></p>
+<p>w6:尋找lua程式與<span>coppeliaSim 文章</span>，並且使用lua程式控制軸在coppeliaSim裡模擬，籃球機外觀修整。</p>
+<p></p>
+<p>w7:完成按鍵控制程式與模擬<span>，籃球機外觀修整。</span></p>
+<p><span></span></p>
+<p>w8:除錯與修整，完成簡報與pdf</p>
+<p></p>
+<p>w9:報告</p>
+<h3>工作分配</h3>
+<p>40823152:coppeliaSim 模擬 ，程式設計，尋找資料</p>
+<p>40822310:<span>程式設計，尋找資料</span></p>
+<p>40823125:機構設計，尋找資料，簡報製作，heroku創建</p>
+<p>40823153:Inventor 畫圖 ，<span>coppeliaSim 模擬</span></p>
+<h2>w6</h2>
+<h3>Lua資料</h3>
+<p><span>使用lua控制軸的轉速</span></p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+    -- do some initialization here
+     joint=sim.getObjectHandle('Revolute_joint')
+     sim.sJointTargetVelocity(joint,5.5)</pre>
+<p>介紹:</p>
+<p>1. 設joint 為轉軸</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">	
+joint=sim.getObjectHandle('Revolute_joint')</pre>
+<p>2.設<span>joint 的</span>速度</p>
+<p>呼叫對話框參考資料</p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetDialogInput.htm">https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetDialogInput.htm</a></p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetDialogResult.htm">https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetDialogResult.htm</a></p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/regularApi/simDisplayDialog.htm">https://www.coppeliarobotics.com/helpFiles/en/regularApi/simDisplayDialog.htm</a></p>
+<div>
+<p></p>
+</div>
+<h2>w7</h2>
+<h3>keyboard control</h3>
+<p><span>使用keyboard</span><span> 控制軸的啟動</span></p>
+<p><span>lua程式碼</span></p>
+<pre class="brush:csharp;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+    -- do some initialization here
+     joint=sim.getObjectHandle('Revolute_joint')
+     sim.sJointTargetVelocity(joint,5.5)
+     number=-10
+      
+      
+  
+ 
+ 
+end
+ 
+function sysCall_actuation()
+ message,auxiliaryData=sim.getSimulatorMessage()
+ if (message==sim.message_keypress) then
+      if (auxiliaryData[1]==2007) then
+      sim.setJointTargetVelocity(joint,number)
+      end
+      if (auxiliaryData[1]==2008) then
+      sim.setJointTargetVelocity(joint,0)
+      end
+ end   
+ 
+ 
+end</pre>
+<p><span>1.定義2個參數為sim.getSimulatorMessage()</span></p>
+<pre class="brush:csharp;auto-links:false;toolbar:false" contenteditable="false">	
+message,auxiliaryData=sim.getSimulatorMessage()</pre>
+<p><span>2.當參數為鍵盤up按鍵，使軸轉number的速度</span></p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">if (message==sim.message_keypress) then
+     if (auxiliaryData[1]==2007) then
+     sim.setJointTargetVelocity(joint,number)
+     end
+</pre>
+<p></p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/A5Ws3gGDpjc" width="560"></iframe>&lt;h2&gt;w8&lt;/h2&gt;</p>
+<p>&lt;h3&gt;basketball Machine 2.4.3&lt;/h3&gt;</p>
+<p></p>
+<h2>w8</h2>
+<h3>basketball Machine 2.4.3</h3>
+<p><span>1.擊球桿新增後轉功能，可以有效控制擊球的時機</span></p>
+<p><span></span></p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/R4FlyPlJxqw" width="560"></iframe></p>
+<p><br/>Inquire keyboard number &lt;&lt; <a href="/get_page/basketball%20Machine%202.4.3/Inquire keyboard number.html">Previous</a> <a href="/get_page/basketball%20Machine%202.4.3/stage1-product.html">Next</a> &gt;&gt; stage1-product</p>
