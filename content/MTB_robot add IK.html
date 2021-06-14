@@ -133,10 +133,61 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w16 << <a href='w16.html'>Previous</a> <a href='coppeliasim場景.html'>Next</a> >> coppeliasim場景<br /><h1>oneshape繪圖</h1>
-<p><a href="https://cad.onshape.com/documents/ec3638947f8008f58291660b/w/c01a74c3edad00122b02b07f/e/f2607389dd386e939435e130">https://cad.onshape.com/documents/ec3638947f8008f58291660b/w/c01a74c3edad00122b02b07f/e/f2607389dd386e939435e130</a></p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/XRxYmfUz2MM" width="560"></iframe></p>
-<br />w16 << <a href='w16.html'>Previous</a> <a href='coppeliasim場景.html'>Next</a> >> coppeliasim場景</div>
+    <div id="tipue_search_content">手臂末端加入 components-gripper-suction pad 吸盤跟鍵盤控制 << <a href='手臂末端加入 components-gripper-suction pad 吸盤跟鍵盤控制.html'>Previous</a> <a href='bug.html'>Next</a> >> bug<br /><h1>MTB_robot add IK</h1>
+<p>lua程式測試網頁版</p>
+<p><a href="https://www.runoob.com/try/runcode.php?filename=HelloWorld&amp;type=lua">https://www.runoob.com/try/runcode.php?filename=HelloWorld&amp;type=lua</a></p>
+<p>角度計算程式</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">-- The decimal point of number x is rounded to the nth place
+function round(x, n)
+    n = math.pow(10, n or 0)
+    x = x * n
+    if x &gt;= 0 then x = math.floor(x + 0.5) else x = math.ceil(x - 0.5) end
+    return x / n
+end
+ 
+-- radian to degree
+deg = 180/math.pi
+-- link 1 length
+a1 = 0.467
+-- link 2 length
+a2 = 0.4
+-- derivated based upon https://www.youtube.com/watch?v=IKOGwoJ2HLk&amp;t=311s
+function ik(x, y)
+    -- (x, y) need to be located inside the circle with radius a1+a2
+    if (x^2 + y^2) &lt;= (a1+ a2)^2 then
+        q2 = math.acos((x^2+y^2-a1^2-a2^2)/(2*a1*a2))
+        q1 = math.atan2(y, x) - math.atan2((a2*math.sin(q2)), (a1+a2*math.cos(q2)))
+        return {round(q1*deg, 4), round(q2*deg, 4)}
+    else
+        print("Over range!")
+        -- end the script execution
+        os.exit()
+    end
+end
+ 
+theta = ik(-0.3, -0.55)
+ 
+print(theta[1], theta[2])</pre>
+<p></p>
+<p></p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/kAq3x0Ao2js" width="560"></iframe></p>
+<p>位子控制程式碼</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">      if (auxiliaryData[1]==49) then --1
+      V1=43.9242*deg
+      V2=66.007*deg
+      sim.setJointPosition(axis1, V1)
+      sim.setJointPosition(axis2, V2)
+      print(0.2,0.7)
+      end
+      if (auxiliaryData[1]==50) then --2
+      V1=-158.2529*deg
+      V2=87.7894*deg
+      sim.setJointPosition(axis1, V1)
+      sim.setJointPosition(axis2, V2)
+      print(-0.3,0.55)
+      end</pre>
+<p></p>
+<p></p><br />手臂末端加入 components-gripper-suction pad 吸盤跟鍵盤控制 << <a href='手臂末端加入 components-gripper-suction pad 吸盤跟鍵盤控制.html'>Previous</a> <a href='bug.html'>Next</a> >> bug</div>
         
     <!-- footer -->
       <div class="container">
