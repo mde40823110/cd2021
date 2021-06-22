@@ -598,7 +598,63 @@ print(theta[1], theta[2])</pre>
 <p><a href="https://drive.google.com/drive/folders/1OLC3aaZDLjfOV83BSGXqwQgmlf1pcbRD?usp=sharing">籃球機 sensor</a></p>
 <p><a href="https://drive.google.com/drive/folders/1Iw-gwgMGPL3zxq9aTTqa3zqRnfZ3IsFi?usp=sharing">final Basketball-Machine</a></p>
 <p><a href="https://drive.google.com/file/d/1u6epma_WaJ0zNhJy27QHzvPD9I0Ar_ly/view?usp=sharing">籃球框3.1.7z</a></p>
-<p><a href="https://drive.google.com/file/d/1dtXe2oAUYMcQbaaZTlia07DERVJ2DiG3/view?usp=sharing">籃球框3.2.7z</a></p><h1>bug</h1>
+<p><a href="https://drive.google.com/file/d/1dtXe2oAUYMcQbaaZTlia07DERVJ2DiG3/view?usp=sharing">籃球框3.2.7z</a></p>
+<p>籃球框移動版本程式一</p>
+<p>利用鍵盤控制</p>
+<pre class="brush:lua;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+     axis3=sim.getObjectHandle('Prismatic_joint')
+     distance3 = 0
+end
+ 
+function sysCall_actuation()
+ message,auxiliaryData=sim.getSimulatorMessage()
+ if (message==sim.message_keypress) then
+      print(auxiliaryData[1])--key
+      if (auxiliaryData[1]==string.byte(' ')) then
+      end
+      if (auxiliaryData[1]==2007) then --up
+      distance3 = distance3 + 0.01
+      sim.setJointPosition(axis3, distance3)
+      end
+      if (auxiliaryData[1]==2008) then --down
+      distance3 = distance3 - 0.01
+      sim.setJointPosition(axis3, distance3)
+      end
+ end   
+end
+</pre>
+<p> 版本二利用迴圈做自動左右移動</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+     j=sim.getObjectHandle('slide')
+     d = 0--posion
+     a=10
+     b=0
+end
+ 
+function sysCall_actuation()
+
+for i=0,10 do
+      if (a==10) then
+      d = d - 0.0003
+      sim.setJointPosition(j, d)
+      if(d&lt;=-0.5)then
+      a=0
+      b=10
+      end
+      print(11111)
+      end
+      if (b==10) then
+      d = d + 0.0003
+      sim.setJointPosition(j, d)
+      if(d&gt;=0.5)then
+      a=10
+      b=0
+      end
+      print(333)
+      end
+      end  
+end</pre>
+<p></p><h1>bug</h1>
 <p>wsgi打不開</p>
 <p><img alt="" height="862" src="/images/螢幕擷取畫面 2021-06-10 131000.png" width="1203"/></p>
 <p>將倉儲裡2個檔案複製一分到cmsimde資料夾裡</p>
