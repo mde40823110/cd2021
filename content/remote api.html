@@ -133,10 +133,99 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w16 << <a href='w16.html'>Previous</a> <a href='coppeliasim場景.html'>Next</a> >> coppeliasim場景<br /><h1>oneshape繪圖</h1>
-<p><a href="https://cad.onshape.com/documents/ec3638947f8008f58291660b/w/c01a74c3edad00122b02b07f/e/f2607389dd386e939435e130">https://cad.onshape.com/documents/ec3638947f8008f58291660b/w/c01a74c3edad00122b02b07f/e/f2607389dd386e939435e130</a></p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/XRxYmfUz2MM" width="560"></iframe></p>
-<br />w16 << <a href='w16.html'>Previous</a> <a href='coppeliasim場景.html'>Next</a> >> coppeliasim場景</div>
+    <div id="tipue_search_content">MTB_robo use require << <a href='MTB_robo use require.html'>Previous</a> <a href='w17小組task.html'>Next</a> >> w17小組task<br /><h1>remote api</h1>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/M7_cvTle6xQ" width="560"></iframe></p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">import sim as vrep
+import math
+import random
+import time
+import keyboard
+  
+  
+print ('Start')
+  
+# Close eventual old connections
+vrep.simxFinish(-1)
+# Connect to V-REP remote server
+clientID = vrep.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
+  
+if clientID != -1:
+    print ('Connected to remote API server')
+      
+    res = vrep.simxAddStatusbarMessage(
+        clientID, "40823110",
+        vrep.simx_opmode_oneshot)
+    if res not in (vrep.simx_return_ok, vrep.simx_return_novalue_flag):
+        print("Could not add a message to the status bar.")
+  
+      
+    opmode = vrep.simx_opmode_oneshot_wait
+    angle1=math.pi/180
+      
+    # radian to degree
+    deg = 180/math.pi
+    # link 1 length
+    a1 = 0.468
+    # link 2 length
+    a2 = 0.4
+    # derivated based up https://www.youtube.com/watch?v=IKOGwoJ2HLk&amp;t=311s
+       
+    def ik(x, y):
+    # (x, y)  need to be located inside the circle with radius a1+a2
+       if (x**2 + y**2) &lt;= (a1+ a2)**2:
+          q2 = math.acos((x**2+y**2-a1**2-a2**2)/(2*a1*a2))
+          q1 = math.atan2(y, x) - math.atan2((a2*math.sin(q2)), (a1+a2*math.cos(q2)))
+        # The decimal point of number is rounded to the 4th place
+          return [round(q1*deg, 4), round(q2*deg, 4)]
+       else:
+         print("Over range!")
+        # end the script execution
+ 
+  
+    theta = ik(0.2, 0.7)
+  
+    print(theta[0], theta[1])
+ 
+ 
+    ret,axis1=vrep.simxGetObjectHandle(clientID,"MTB_axis1",opmode)
+    ret,axis2=vrep.simxGetObjectHandle(clientID,"MTB_axis2",opmode)
+    ret,axis3=vrep.simxGetObjectHandle(clientID,"MTB_axis3",opmode)
+    ret,suctionPad=vrep.simxGetObjectHandle(clientID,"suctionPad",opmode)
+    vrep.simxSetJointTargetPosition(clientID,axis1,theta[0]*angle1,opmode)
+    vrep.simxSetJointTargetPosition(clientID,axis2,theta[1]*angle1,opmode)
+    
+    time.sleep(0.5)
+    while True:
+            vrep.simxSetJointPosition(clientID,axis3,0.001,opmode)
+            time.sleep(0.5)
+            theta = ik(0.2, 0.7)
+            time.sleep(0.5)
+            vrep.simxSetJointPosition(clientID,axis1,theta[0]*angle1,opmode)
+            vrep.simxSetJointPosition(clientID,axis2,theta[1]*angle1,opmode)
+            time.sleep(2)
+            vrep.simxSetIntegerSignal(clientID,"suctionPad", 0,opmode)
+            time.sleep(0.5)
+            vrep.simxSetJointPosition(clientID,axis3,-0.001,opmode)
+            time.sleep(0.5)
+            vrep.simxSetIntegerSignal(clientID,"suctionPad", 0,opmode)
+            time.sleep(0.5)
+            vrep.simxSetJointPosition(clientID,axis3,0.001,opmode)
+            time.sleep(0.5)
+            theta = ik(-0.3, -0.55)
+            vrep.simxSetJointPosition(clientID,axis1,theta[0]*angle1,opmode)
+            vrep.simxSetJointPosition(clientID,axis2,theta[1]*angle1,opmode)
+            time.sleep(2)
+            vrep.simxSetIntegerSignal(clientID,"suctionPad", 1,opmode)
+            time.sleep(0.5)
+            vrep.simxSetJointPosition(clientID,axis3,-0.001,opmode)
+            time.sleep(0.5)
+            vrep.simxSetJointPosition(clientID,axis3,0.002,opmode)
+    end
+          
+else:
+    print ('Failed connecting to remote API server')
+    print ('End')</pre>
+<p></p><br />MTB_robo use require << <a href='MTB_robo use require.html'>Previous</a> <a href='w17小組task.html'>Next</a> >> w17小組task</div>
         
     <!-- footer -->
       <div class="container">
