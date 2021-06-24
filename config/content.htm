@@ -657,7 +657,75 @@ for i=0,10 do
       end  
 end</pre>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/_DB4TPBAwF4" width="560"></iframe></p>
-<p></p><h1>bug</h1>
+<p>basketball hoop sensor</p>
+<pre class="brush:lua;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+    -- do some initialization here
+     joint=sim.getObjectHandle('Revolute_joint')
+     proximity = sim.getObjectHandle("Proximity_sensor")
+     proximity0 = sim.getObjectHandle("Proximity_sensor0")
+     proximity1 = sim.getObjectHandle("Proximity_sensor1")
+     ball = sim.getObjectHandle("Shape7")
+     box = sim.getObjectHandle("Shape")
+     boxDummy = sim.getObjectHandle("Dummy")
+     --sim.sJointTargetVelocity(joint,5.5)
+     number=-16
+     a = 0
+     b = 0
+     c = 0
+     d = 0
+     --print(auxiliaryData[1])
+     --if (auxiliaryData[1]==string.byte(' ')) then
+     
+
+end
+
+function sysCall_actuation()
+-- Read Proximity sensor (0= nothing detected, 1 = object detected)
+     local res = sim.readProximitySensor(proximity)
+     local res0 = sim.readProximitySensor(proximity0)
+     local res1 = sim.readProximitySensor(proximity1)
+     if res == 1 then
+     a = 1
+     -- print(a,b,c)
+     end
+     if res0 == 1 then
+     b = 1
+     -- print(a,b,c)
+     end
+     if res1 == 1 then
+     c = 1
+     -- print(a,b,c)
+     end
+     if b == 1 and a == 1 and c == 1 then
+     b = 0 
+     a = 0
+     c = 0
+     d = d+1
+     print(d)
+     -- print(a,b,c)
+     end
+ message,auxiliaryData=sim.getSimulatorMessage()
+ if (message==sim.message_keypress) then
+      if (auxiliaryData[1]==2007) then
+      sim.setJointTargetVelocity(joint,number)
+      end
+      if (auxiliaryData[1]==32) then
+      sim.setJointTargetVelocity(joint,0)
+      end
+      if (auxiliaryData[1]==2008) then
+      sim.setJointTargetVelocity(joint,1)
+      end
+      if (auxiliaryData[1]==97) then 
+      local insertedObjects = sim.copyPasteObjects({ball,box,boxDummy},0)
+      -- local disturbedCoordinates = {1.0002,0.0000012517,1.0734}
+      local disturbedCoordinates = {-2.5,0.050002,2.88}
+      sim.setObjectPosition(insertedObjects[2],-1,disturbedCoordinates)
+      end
+ end    
+
+
+end</pre>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/x4-fqzVcYUA" width="560"></iframe></p><h1>bug</h1>
 <p>wsgi打不開</p>
 <p><img alt="" height="862" src="/images/螢幕擷取畫面 2021-06-10 131000.png" width="1203"/></p>
 <p>將倉儲裡2個檔案複製一分到cmsimde資料夾裡</p>
